@@ -1,8 +1,8 @@
 services:
   flask-app:
     build: ./flask-app
-    ports:
-      - "4900:5000"
+    # ports:
+    #   - "4900:5000"
     environment:
       - FLASK_ENV=production
     restart: always
@@ -15,3 +15,25 @@ services:
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     depends_on:
       - flask-app
+
+  lorawan-compiler-webapp:
+    build: ./LoRaWAN-Compiler-Webapp
+    #image: lorawan-compiler-webapp # Webapp image
+    # ports:
+    #   - "4050:4050" # Webapp port
+    volumes:
+      - shared-vol:/shared-vol # Volume to share data across containers
+      - ${STM32WL_PATH:-../STM32WL/STM32WL-standalone}:/STM32WL # Path to compiler folder
+      - /var/run/docker.sock:/var/run/docker.sock # Docker socket to start container inside a container
+    environment:
+      - GENERAL_SETUP_PATH=/LoRaWAN/App # General_Setup.h path in compiler folder
+      - CONFIG_APPLICATION_PATH=/LoRaWAN # config_application.h path in compiler folder
+
+  compiler:
+    image: montagny/arm-compiler:1.0 # Image used for compilation
+    deploy:
+      replicas: 0
+      
+volumes:
+  shared-vol:
+    name: "shared-vol"
