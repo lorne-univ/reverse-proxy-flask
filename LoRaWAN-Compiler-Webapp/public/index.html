@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <title>LoRaWAN Firmware Generation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="img/logo.png" alt="Site Logo">
+            </div>
+            <h1> LoRaWAN Firmware Generation </h1>
+        </div>
+    </header>
+    <div class="page-container">
+
+        <div class="form-container">
+
+            <div class="lorawan-container">
+
+                <div class="title-container">
+                    <h2>LoRaWAN Configuration</h2>
+                    <div id="restore-lorawan" class="restore">Restore default</div>
+                </div>
+
+                <div class="lorawan-form">
+
+                    <div class="activation-mode">
+                        <h3>Activation Mode <i class="fa-regular fa-circle-question"></i></h3>
+                        <select id="activation-mode" name="activation-mode">
+                            <option value="otaa">OTAA</option>
+                            <option value="abp">ABP</option>
+                        </select>
+                    </div>
+
+                    <div class="class">
+                        <h3>Class</h3>
+                        <select id="class" name="class">
+                            <option value="class_a">Class_A</option>
+                            <option value="class_b">Class_B</option>
+                            <option value="class_c">Class_C</option>
+                        </select>
+                    </div>
+
+                    <div class="spreading-factor">
+                        <h3>Spreading Factor <i class="fa-regular fa-circle-question"></i></h3>
+                        <select id="spreading-factor" name="spreading-factor">
+                            <option value="7">SF7</option>
+                            <option value="8">SF8</option>
+                            <option value="9">SF9</option>
+                            <option value="10">SF10</option>
+                            <option value="11">SF11</option>
+                            <option value="12">SF12</option>
+                        </select>
+                    </div>
+
+                    <div class="adaptative-dr">
+                        <h3>Adaptative DR <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="adaptative-dr-on" name="adaptative-dr" value="on">
+                                <label for="adaptative-dr-on">On</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="adaptative-dr-off" name="adaptative-dr" value="off" checked>
+                                <label for="adaptative-dr-off">Off</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="confirmation">
+                        <h3>Confirmation <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="confirmation-on" name="confirmation" value="on">
+                                <label for="confirmation-on">Confirmed</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="confirmation-off" name="confirmation" value="off" checked>
+                                <label for="confirmation-off">Unconfirmed</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app_port">
+                        <h3>FPort <i class="fa-regular fa-circle-question"></i></h3>
+                        <input type="number" id="app_port" name="app_port" min="1" max="255" value="15">
+                    </div>
+                </div>
+            </div>
+
+            <div class="application-container">
+
+                <div class="title-container">
+                    <h2>Application Configuration</h2>
+                    <div id="restore-app" class="restore">Restore default</div>
+                </div>
+
+                <div class="application-form">
+
+                    <div class="send-mode">
+                        <h3>Transmission Mode</h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="send-by-push-button" name="send-mode" value="push-button">
+                                <label for="send-by-push-button">Transmission triggered by Push-Button</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="send-every-frame-delay" name="send-mode"
+                                    value="every-frame-delay" checked>
+                                <label for="send-every-frame-delay">Transmission every <input type="number"
+                                        id="frame-delay" name="frame-delay" min="8" value="10"> seconds</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payload-configuration">
+                        <h3>Payload Configuration</h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="checkbox" id="hello" name="payload-configuration" value="hello" checked>
+                                <label for="hello">"HELLO"</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="checkbox" id="temperature" name="payload-configuration"
+                                    value="temperature">
+                                <label for="temperature">Temperature</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="checkbox" id="humidity" name="payload-configuration" value="humidity">
+                                <label for="humidity">Humidity</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cayenne-lpp">
+                        <h3>Cayenne LPP <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="cayenne-lpp-enabled" name="cayenne-lpp" value="enabled">
+                                <label for="cayenne-lpp-enabled">Enabled</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="cayenne-lpp-disabled" name="cayenne-lpp" value="disabled"
+                                    checked>
+                                <label for="cayenne-lpp-disabled">Disabled</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dev-eui">
+                        <h3>DevEUI <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="dev-eui-container">
+                            <div class="input-icon">
+                                <input type="text" id="dev-eui" name="dev-eui" maxlength="16">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-dev-eui" class="generate-dev-eui btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="otaa-container">
+
+                <div class="title-container">
+                    <h2>OTAA Configuration</h2>
+                </div>
+
+                <div class="otaa-form">
+
+                    <div class="appkey">
+                        <h3>AppKey <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="appkey-container">
+                            <div class="input-icon">
+                                <input type="text" id="appkey" name="appkey" maxlength="32">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-appkey" class="generate-appkey btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                    <div class="appeui-joineui">
+                        <h3>AppEUI - JoinEUI <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="appeui-joineui-container">
+                            <div class="input-icon">
+                                <input type="text" id="appeui" name="appeui" maxlength="16">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-appeui" class="generate-appeui btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="abp-container">
+
+                <div class="title-container">
+                    <h2>ABP Configuration</h2>
+                </div>
+
+                <div class="abp-form">
+
+                    <div class="devaddr">
+                        <h3>DevAddr <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="devaddr-container">
+                            <div class="input-icon">
+                                <input type="text" id="devaddr" name="devaddr" maxlength="8">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-devaddr" class="generate-devaddr btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                    <div class="nwkskey">
+                        <h3>NwkSKey <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="nwkskey-container">
+                            <div class="input-icon">
+                                <input type="text" id="nwkskey" name="nwkskey" maxlength="32">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-nwkskey" class="generate-nwkskey btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                    <div class="appskey">
+                        <h3>AppSKey <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="appskey-container">
+                            <div class="input-icon">
+                                <input type="text" id="appskey" name="appskey" maxlength="32">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-appskey" class="generate-appskey btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="advance-container">
+
+                <div class="title-container">
+                    <div class="closed-advance-container">
+                        <h2>Advanced Settings</h2>
+                        <div class="svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="33px" viewBox="0 -960 960 960" width="33px"
+                                fill="#333">
+                                <path
+                                    d="M521.33-480.67 328-674l47.33-47.33L616-480.67 375.33-240 328-287.33l193.33-193.34Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="restore-adv" class="restore">Restore default</div>
+                </div>
+
+                <div class="advanced-settings-form">
+
+                    <div class="admin-sensor">
+                        <h3>IKS01A3 Sensors <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="admin-sensor-enabled" name="admin-sensor" value="enabled">
+                                <label for="admin-sensor-enabled">Enabled</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="admin-sensor-disabled" name="admin-sensor" value="disabled"
+                                    checked>
+                                <label for="admin-sensor-disabled">Disabled</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mlr003-sim">
+                        <h3>Thermostatic valve simulation <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="radio-buttons">
+                            <div class="radio-button">
+                                <input type="radio" id="mlr003-sim-on" name="mlr003-sim" value="on">
+                                <label for="mlr003-sim-on">On</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="mlr003-sim-off" name="mlr003-sim" value="off" checked>
+                                <label for="mlr003-sim-off">Off</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mlr003-app-port">
+                        <h3>Downlink FPort</h3>
+                        <input type="number" id="mlr003-app-port" name="mlr003-app-port" min="1" max="255" value="30">
+                    </div>
+
+                    <div class="admin-gen-app-key">
+                        <h3>GenAppKey <span style="font-weight: normal; font-size: 80%;">(Multicast)</span> <i
+                                class="fa-regular fa-circle-question"></i></h3>
+                        <div class="admin-gen-app-key-container">
+                            <div class="input-icon">
+                                <input type="text" id="admin-gen-app-key" name="admin-gen-app-key" maxlength="32">
+                                <i class="fa-solid fa-copy copy-icon"></i>
+                            </div>
+                            <button id="generate-admin-gen-app-key" class="generate-admin-gen-app-key btn"><i
+                                    class="fa-solid fa-shuffle"></i>Generate</button>
+                        </div>
+                    </div>
+
+                    <div class="multiple-firmware">
+                        <h3>Generate multiple Firmwares <i class="fa-regular fa-circle-question"></i></h3>
+                        <div class="multiple-firmware-container">
+                            <div class="radio-button">
+                                <input type="checkbox" id="multiple-firmware-on" name="multiple-firmware" value="on">
+                                <label for="multiple-firmware-on">On</label>
+                            </div>
+                            <div class="firmware-number">Generate <input type="number" id="firmware-nb"
+                                    name="firmware-nb" min="1" max="1000000" value="2" disabled> firmwares named <input
+                                    type="text" id="firmware-name" name="firmware-name" value="device" disabled></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-bar-container">
+                <h2>Compiling</h2>
+                <div class="load-bar-progress-container">
+                    <div class="load-bar-progress"></div>
+                </div>
+                <div class="load-bar-bottom">
+                    <p></p>
+                    <div id="cancel">Cancel</div>
+                </div>
+            </div>
+
+            <button id="generate-firmware" class="generate-firmware"><i class="fa-solid fa-gear"></i>Compile</button>
+            <div class="compiler-container">
+                <div class="header-compiler">
+                    <h3>Console Logs</h3>
+                </div>
+                <div id="log-container"></div>
+            </div>
+            <button id="toggle-compiler" class="toggle-compiler">
+                <i class="fa-solid fa-chevron-right" style="transform: rotate(180deg);"></i>
+                <i class="fa-solid fa-terminal"></i>
+            </button>
+        </div>
+
+
+</body>
+
+<script type="module" src="js/main.js"></script>
+
+</html>

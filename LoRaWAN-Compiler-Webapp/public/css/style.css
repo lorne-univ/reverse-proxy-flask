@@ -1,0 +1,604 @@
+@font-face {
+  font-family: "SegoeUI";
+  src: local("Segoe UI Light"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff2) format("woff2"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff) format("woff"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.ttf) format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "SegoeUI";
+  src: local("Segoe UI Semilight"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff2) format("woff2"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff) format("woff"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.ttf) format("truetype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "SegoeUI";
+  src: local("Segoe UI"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2) format("woff2"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff) format("woff"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "SegoeUI";
+  src: local("Segoe UI Bold"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff2) format("woff2"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff) format("woff"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.ttf) format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "SegoeUI";
+  src: local("Segoe UI Semibold"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2) format("woff2"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff) format("woff"),
+    url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --primary-color: #0f6cbd;
+  /* Couleur principale */
+  --gray-color: #efeef4;
+  /* Blanc cassé */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "SegoeUI";
+}
+
+body {
+  background-color: var(--gray-color);
+  /* overflow: hidden; */
+}
+
+/* Header Styles */
+header {
+  padding: 1vw;
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.header-container h1 {
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.header-container img {
+  width: 38.41px;
+  height: 28.67px;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Form Styles */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  gap: 2vw;
+  padding: 2vw;
+  margin: 2vw 0;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+
+.title-container h2 {
+  font-weight: bold;
+}
+
+.restore {
+  text-decoration: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* LoRaWAN Form Styles */
+.lorawan-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vw;
+  margin: 20px;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+/* Input Styles */
+input[type="text"],
+select {
+  padding: 10px;
+  width: 100%;
+  background-color: #f8fafc;
+  border: 1px solid var(--gray-color);
+  border-radius: 4px;
+}
+
+input[type="number"] {
+  padding: 10px;
+  background-color: #f8fafc;
+  border: 1px solid var(--gray-color);
+  border-radius: 4px;
+}
+
+select {
+  cursor: pointer;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.lorawan-container,
+.application-container,
+.otaa-container,
+.advance-container,
+.abp-container,
+.load-bar-container {
+  width: 50vw;
+}
+
+.radio-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-button input[type="radio"],
+.radio-button input[type="checkbox"],
+.radio-button label {
+  cursor: pointer;
+}
+
+/* Application Form Styles */
+.application-form {
+  display: grid;
+  gap: 2vw;
+  margin: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.send-mode,
+.payload-configuration,
+.cayenne-lpp,
+.dev-eui {
+  display: flex;
+  flex-direction: column;
+}
+
+.send-mode,
+.dev-eui {
+  grid-column: span 2;
+}
+
+.send-mode .radio-buttons {
+  gap: 30px;
+}
+
+.send-mode .radio-button:first-child {
+  padding-top: 10px;
+}
+
+#frame-delay {
+  width: 20%;
+}
+
+.dev-eui-container,
+.appkey-container,
+.appeui-joineui-container,
+.admin-gen-app-key-container,
+.devaddr-container,
+.nwkskey-container,
+.appskey-container {
+  display: flex;
+  gap: 10px;
+}
+
+button.generate-dev-eui,
+button.generate-appkey,
+button.generate-appeui,
+button.generate-admin-gen-app-key,
+button.generate-devaddr,
+button.generate-nwkskey,
+button.generate-appskey {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.fa-solid {
+  margin-top: 1px;
+  font-size: 1.2em;
+}
+
+/* otaa Form Styles */
+.otaa-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2vw;
+  margin: 20px;
+}
+
+/* abp Form Styles */
+.abp-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2vw;
+  margin: 20px;
+}
+
+.abp-container {
+  display: none;
+}
+
+/* Advanced Settings Styles */
+.advanced-settings-form {
+  gap: 2vw;
+  margin: 20px;
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.advance-container .title-container .closed-advance-container {
+  cursor: pointer;
+}
+
+.advance-container .title-container .restore {
+  display: none;
+}
+
+.mlr003-app-port,
+.mlr003-sim {
+  grid-column: span 1;
+}
+
+.admin-gen-app-key,
+.admin-sensor,
+.multiple-firmware {
+  grid-column: span 2;
+}
+
+.admin-sensor,
+.mlr003-sim,
+.mlr003-app-port,
+.admin-gen-app-key,
+.multiple-firmware {
+  display: flex;
+  flex-direction: column;
+}
+
+.closed-advance-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#mlr003-app-port {
+  width: 20%;
+}
+
+#firmware-name {
+  width: 40%;
+}
+
+#firmware-nb {
+  width: 15%;
+}
+
+.svg {
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+  transform-origin: 20px 22px;
+  transition: transform 0.2s ease;
+}
+
+.multiple-firmware-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.firmware-number,
+.firmware-number input,
+.firmware-name input {
+  color: #d1d1d1;
+}
+
+/* Generate Firmware Button */
+.generate-firmware {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  width: 25%;
+  font-size: 1.3em;
+  justify-content: center;
+  margin-bottom: 1vw;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 3vw;
+}
+
+/* Compiler Styles */
+.compiler-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: -35%;
+  width: 35%;
+  height: 100%;
+  background: black;
+  color: white;
+  transition: right 0.3s ease;
+}
+
+.header-compiler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 65px;
+  width: 100%;
+  background: #1e1e1e;
+}
+
+#log-container {
+  flex-grow: 1;
+  width: 100%;
+  background: #242424;
+  overflow: scroll;
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+#log-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+#log-container::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+#log-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
+}
+
+#log-container p {
+  word-wrap: break-word;
+  white-space: normal;
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+#log-container>p:last-child {
+  margin-bottom: 50px;
+}
+
+/* Toggle Compiler Button */
+.toggle-compiler {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 10px 0 0;
+  cursor: pointer;
+  transition: right 0.3s ease;
+}
+
+.toggle-compiler .fa-chevron-right {
+  color: white;
+  /* transform: rotate(90deg); */
+}
+
+.toggle-compiler .fa-terminal {
+  background: white;
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+
+/* Load Bar Styles */
+.load-bar-container {
+  display: none;
+  flex-direction: column;
+  gap: 1vw;
+  background-color: white;
+}
+
+.load-bar-progress-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--gray-color);
+  gap: 1vw;
+  padding: 4px;
+  border-radius: 30px;
+  width: 100%;
+}
+
+.load-bar-progress {
+  width: 0%;
+  height: 20px;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  position: relative;
+}
+
+.load-bar-container p,
+.load-bar-container h2 {
+  margin-left: 1vw;
+}
+
+.load-bar-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cancel {
+  color: red;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+
+  .lorawan-container,
+  .application-container,
+  .otaa-container,
+  .advance-container,
+  .abp-container {
+    width: 70vw;
+    /* Ajuste la largeur pour les écrans moyens */
+  }
+
+  .lorawan-form,
+  .application-form,
+  .advance-container {
+    grid-template-columns: repeat(2, 1fr);
+    /* Passe à 2 colonnes */
+  }
+}
+
+@media (max-width: 800px) {
+
+  .lorawan-container,
+  .application-container,
+  .otaa-container,
+  .advance-container,
+  .abp-container {
+    width: 85vw;
+    /* Ajuste la largeur pour les petits écrans */
+  }
+
+  .lorawan-form,
+  .application-form,
+  .advanced-container {
+    grid-template-columns: 1fr;
+    /* 1 colonne pour les petits écrans */
+  }
+
+  .title-container h2 {
+    font-size: 1.5em;
+    /* Augmente la taille du titre sur petits écrans */
+  }
+}
+
+.input-icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-icon input {
+  padding-right: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-icon i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+/* Caption Styles */
+.fa-circle-question:before,
+.fa-question-circle:before {
+  color: grey;
+  font-size: 75%;
+  cursor: pointer;
+}
+
+/* Tooltip container styling */
+.tooltip {
+  position: absolute;
+  background-color: #162133;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  max-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 15px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #162133 transparent transparent transparent;
+}
+
+.tooltip a {
+  color: var(--primary-color);
+  text-decoration: none;
+}

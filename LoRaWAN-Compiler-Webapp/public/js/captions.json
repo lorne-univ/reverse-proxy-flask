@@ -1,0 +1,18 @@
+{
+  "ActivationMode": "You decide how to activate your device. Whenever possible use OTAA for security reasons.",
+  "SpreadingFactor": "Low SF : high data rate, low Time on Air, but low coverage. High SF : low data rate, high Time on Air, but high coverage.",
+  "AdaptativeDR": "Network management of SF and power transmission.",
+  "Confirmation": "Choose if you want an acknowledgement for each uplink transmission.",
+  "FPort": "This is the application port. 0 is reserved for MAC Command and is not allowed to transmit the user payload.",
+  "CayenneLPP": "This is a common payload format as described here : <a href='https://docs.mydevices.com/docs/lorawan/cayenne-lpp' target='_blank'>CayenneLPP documentation</a>",
+  "DevEUI": "A 64 bit extended unique identifier for your end-device.",
+  "AppKey": "The specific encryption key used during the OTAA activation process.",
+  "DevAddr": "A 32 bit non-unique identifier for your end-device.",
+  "AppSKey": "Application Session Key used for encryption.",
+  "NwkSKey": "Network Session Key used for authentication.",
+  "AppEUI-JoinEUI": "AppEUI-JoinEUI have different names but are the same EUI. It's a A 64 bit value to identity your Join Server. If you don't use a Join Server, you can set it to zero.",
+  "IKS01A3Sensors": "If you have an IKS01A3 sensor board from ST, then you will have real temperature and humidity values instead of simulated ones.",
+  "Thermostaticvalvesimulation": "This is a specific application to simulate a thermostatic valve.",
+  "GenAppKey(Multicast)": "Specific Key only for Multicast applications.",
+  "GeneratemultipleFirmwares": "You can generate multiple firmware at once. All firmwares will have the same application settings but have their own set of DevEUI and Keys. The output is a zip file with the firmware and a csv file to facilitate the provisioning."
+}
