@@ -62,3 +62,34 @@ apache-1                   | 193.48.121.87 - - [09/Dec/2024:10:11:31 +0000] "GET
 apache-1                   | 193.48.121.87 - - [09/Dec/2024:10:11:31 +0000] "GET /compiler/js/main.js HTTP/1.1" 304 - "http://preprod.univ-lorawan.fr/compiler/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko
 ```
 On voit l'erreur **404** lors du GET /socket.io/socket.io.js
+
+## Fichier httpd.conf
+
+```
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ServerName preprod.univ-lorawan.fr
+    # Redirection vers une application backend
+    ProxyPass /flask http://flask-app:5000/
+    ProxyPassReverse /flask http://flask-app:5000/
+
+    # <Location />
+    #     Require all granted
+    # </Location>
+
+    ProxyPass "/compiler" "http://lorawan-compiler-webapp:4050"
+    ProxyPassReverse "/compiler" "http://lorawan-compiler-webapp:4050"
+    # ProxyHTMLURLMap "/compiler" "http://lorawan-compiler-webapp:4050"
+
+    # ProxyPass /socket.io/ http://lorawan-compiler-webapp:4050/socket.io/
+    # ProxyPassReverse /socket.io http://lorawan-compiler-webapp:4050/socket.io/
+    LogLevel proxy:trace7
+    RewriteEngine on
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteCond %{HTTP:Connection} upgrade [NC]
+    RewriteRule ^/compiler/(.*) "ws://lorawan-compiler-webapp:4050/$1" [P,L]
+    
+
+</VirtualHost>
+```
+
