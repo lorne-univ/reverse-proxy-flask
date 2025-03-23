@@ -9,6 +9,13 @@ Cette application dessert 3 URL :
 - /test2
 
 Application LoRaWAN-Compiler-WebApp écoute en interne sur le port 4050.
+Pour télécharger l'application voir Readme.md à https://github.com/elias-qzo/LoRaWAN-Compiler-Webapp
+```
+git clone https://github.com/elias-qzo/LoRaWAN-Compiler-Webapp
+git clone https://github.com/SylvainMontagny/STM32WL.git
+```
+Pour démarrer l'application : `docker compose up -d --build`
+
 Cette application dessert plusieurs URL :
 - / 
 - /compile
