@@ -13,8 +13,10 @@ services:
     image: httpd:2.4
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ./apache/md:/usr/local/apache2/md
     depends_on:
       - flask-app
     networks:
