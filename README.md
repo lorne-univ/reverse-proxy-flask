@@ -2,11 +2,21 @@
 
 Ce dépot est construit pour faire des **tests**.
 
+Créer un réseau, commun aux applications et au reverse proxy.dokc
+
+`docker network create reverse-proxy`
+
 Application Flask (flask-app) écoute en interne sur le port 5000.
 Cette application dessert 3 URL : 
 - /
 - /test
 - /test2
+
+L'application flask est hébergée dans le sous-dossier /flask.
+On a donc les URL : 
+- /flask/
+- /flask/test
+- /flask/test2
 
 Application LoRaWAN-Compiler-WebApp écoute en interne sur le port 4050.
 Pour télécharger l'application voir Readme.md à https://github.com/elias-qzo/LoRaWAN-Compiler-Webapp
@@ -14,6 +24,33 @@ Pour télécharger l'application voir Readme.md à https://github.com/elias-qzo/
 git clone https://github.com/elias-qzo/LoRaWAN-Compiler-Webapp
 git clone https://github.com/SylvainMontagny/STM32WL.git
 ```
+Editer le fichier docker-compose.yml
+Rajouter à la fin 
+```
+networks:
+  reverse-proxy:
+    external: true
+```
+Rajouter dans la définition du service compiler-web l'utilisation du réseau: 
+
+```
+services:
+  compiler-web:
+    build: . # Docker build current folder
+    image: lorawan-compiler-webapp # Webapp image
+    ports:
+      - "4050:4050" # Webapp port
+    volumes:
+      - shared-vol:/shared-vol # Volume to share data across containers
+      - ${STM32WL_PATH:-../STM32WL/STM32WL-standalone}:/STM32WL # Path to compiler folder
+      - /var/run/docker.sock:/var/run/docker.sock # Docker socket to start container inside a container
+    environment:
+      - GENERAL_SETUP_PATH=/LoRaWAN/App # General_Setup.h path in compiler folder
+      - CONFIG_APPLICATION_PATH=/LoRaWAN # config_application.h path in compiler folder
+    networks:
+      reverse-proxy:
+```
+
 Pour démarrer l'application : `docker compose up -d --build`
 
 Cette application dessert plusieurs URL :
