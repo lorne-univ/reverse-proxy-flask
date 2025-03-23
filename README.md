@@ -61,7 +61,7 @@ Cette application dessert plusieurs URL :
 Un conteneur httpd retransmet les requête reçues sur le port 80 vers l'application adéquates.
 Les URLS sont : 
 - http://preprod.univ-lorawan.fr/flask 
-- http://preprod.univ-lorawan.fr/compiler
+- http://preprod.univ-lorawan.fr/compile
 
 
 Extrait du fichier httpd.conf 
@@ -73,8 +73,8 @@ Extrait du fichier httpd.conf
         Require all granted
     </Location>
 
-    ProxyPass /compiler http://lorawan-compiler-webapp:4050
-    ProxyPassReverse /compiler http://lorawan-compiler-webapp:4050
+    ProxyPass /compile http://lorawan-compiler-webapp:4050
+    ProxyPassReverse /compile http://lorawan-compiler-webapp:4050
 ```
 
 
