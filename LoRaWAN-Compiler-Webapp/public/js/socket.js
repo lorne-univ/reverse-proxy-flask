@@ -1,12 +1,13 @@
 import { loadBar } from "./loadBar.js";
+import { elements } from "./elements.js";
 
-const logContainer = document.getElementById("log-container");
+const logContainer = elements.console;
 
 let socket;
 let lastParagraph = null;
 
 export function initializeSocket() {
-    socket = io.connect(window.location.href);
+    socket = io(window.location.location, { path:  window.location.pathname+`socket.io` });
 
     socket.on("compilation_log", (data) => {
         loadBar(data.message);

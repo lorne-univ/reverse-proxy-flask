@@ -119,13 +119,14 @@ export function getMultipleFormJson(nbFirmware) {
 // function compile firmware from jsonString of all form data
 export async function compileFirmware(jsonConfig) {
     showLoadBar();
+    elements.console.innerHTML = "";
     try {
         const requestData = {
             clientId: socket.id,
             formData: jsonConfig,
         };
 
-        const response = await fetch("/compile", {
+        const response = await fetch(`./compile`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -171,6 +172,7 @@ let numberOfFirmware = 1;
 // function compile multiple firmware from jsonString of all form data
 export async function compileMultipleFirmware(jsonConfig) {
     showLoadBar();
+    elements.console.innerHTML = "";
     numberOfFirmware = jsonConfig.length;
     try {
         const requestData = {
@@ -178,7 +180,7 @@ export async function compileMultipleFirmware(jsonConfig) {
             formData: jsonConfig,
         };
 
-        const response = await fetch("/compile-multiple", {
+        const response = await fetch(`./compile-multiple`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

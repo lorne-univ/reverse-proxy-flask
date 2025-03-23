@@ -1,3 +1,4 @@
+const { Server } = require("socket.io");
 const socketIo = require('socket.io');
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
@@ -5,7 +6,7 @@ let io;
 
 // Initializes the Socket.IO server with CORS settings and handles client connections.
 const initSocket = (server, containerIdMap) => {
-    io = socketIo(server, {
+    io = new Server(server, {
         cors: {
             origin: "*",
             methods: ["GET", "POST"]
@@ -25,7 +26,6 @@ const initSocket = (server, containerIdMap) => {
  * Stop the container based on the compiled id
  * 
 */
-
 async function stopContainer(clientId, compileId, containerIdMap) {
     const containerId = containerIdMap[compileId];
     if (!containerId) {

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const http = require('http');
@@ -13,6 +14,7 @@ const port = process.env.PORT || 4050;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
+app.set('trust proxy', true);
 
 /* ROUTES */
 

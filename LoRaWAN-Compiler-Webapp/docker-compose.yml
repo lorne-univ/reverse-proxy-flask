@@ -1,24 +1,7 @@
 services:
-  flask-app:
-    build: ./flask-app
-    # ports:
-    #   - "4900:5000"
-    environment:
-      - FLASK_ENV=production
-    restart: always
-
-  apache:
-    image: httpd:2.4
-    ports:
-      - "80:80"
-    volumes:
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
-    depends_on:
-      - flask-app
-
-  lorawan-compiler-webapp:
-    build: ./LoRaWAN-Compiler-Webapp
-    #image: lorawan-compiler-webapp # Webapp image
+  web:
+    build: . # Docker build current folder
+    image: lorawan-compiler-webapp # Webapp image
     ports:
       - "4050:4050" # Webapp port
     volumes:
