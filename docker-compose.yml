@@ -14,6 +14,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - SITE_NAME=preprod.univ-lorawan.fr
     volumes:
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
       - ./apache/md:/usr/local/apache2/md
